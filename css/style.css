@@ -1,0 +1,202 @@
+/* selector */
+
+body{
+    background: rgb(162, 228, 178);
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+    font-size: 30px;
+}
+
+/* Class selector */
+/* heading section styles */
+.MyDet{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 200px;
+    background-color: lavender;
+    display: inline-block;
+    /* border:darkred 3px dashed ; */
+}
+.MyDet > img{
+    top: 10px;
+    left:40px;
+    width: 125px;
+    height: 175px;
+    border-radius: 60px;
+    border: lightseagreen 2px solid;
+    position: absolute;
+    display: inline-block;
+}
+.MyDet h1{
+    margin: auto;
+    width:45%;
+    height:75px;
+    text-align: left;
+    font-size: 60px ;
+    position: absolute;
+    top: 0px;
+    left:175px;
+    display: inline-block;
+    
+}
+
+/* linkedin link styles */
+
+#lin img{
+    position: absolute;
+    top:5px;
+    left:20px;
+    /* width: 25px; */
+    /* height: 25px; */
+}
+#lin{
+    padding-right: 20px;
+    width: 30%;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    left: 65%;
+    color: white;
+    font-size: 25px;
+    text-align: right;
+    text-decoration: none;
+    border-radius: 15px;
+    background-color:#2867b2;
+    /* border:darkred 3px dashed; */
+}
+
+/* Github link styles */
+
+#git img{
+    position: absolute;
+    top:5px;
+    left:20px;
+    /* width: 25px; */
+    /* height: 25px; */
+    
+}
+#git{
+    padding-right: 20px;
+    width: 30%;
+    height: 40px;
+    position: absolute;
+    top: 60px;
+    left: 65%;
+    color: white;
+    font-size: 25px;
+    text-align: right;
+    text-decoration: none;
+    border-radius: 15px;
+    background-color: black;
+    /* border:darkred 3px dashed; */
+}
+.MyDet ul{
+    /* border: blue 2px dashed; */
+    display:inline-block;
+    position: absolute;
+    top: 55px;
+    left: 170px;
+    width: 50%;
+    height: auto;
+    font-size: 18px;
+}
+.MyDet h2{
+    /* border: blue 2px dashed; */
+    display: inline-block;
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    top:100px;
+    left:65%
+}
+/* id selector */
+
+
+/* Creating tabs */
+.GitHub-Projects > input,
+.GitHub-Projects section > div{
+    display: none;
+}
+
+#Gist:checked ~ section .Gist,
+#Repos:checked ~ section .Repos{
+    display: block;
+}
+
+*, *:after, *:before{
+    box-sizing: border-box;
+}
+
+.GitHub-Projects{
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+
+}
+
+.GitHub-Projects ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.GitHub-Projects ul>li label{
+    float: left;
+    padding: 15px 25px;
+    border: 1px solid cyan;
+    border-bottom: 0;
+    background-color:cornsilk;
+}
+.GitHub-Projects ul>li label:hover{
+    background-color: cyan;
+}
+.GitHub-Projects ul>li label:active{
+    background-color: greenyellow;
+}
+.GitHub-Projects section{
+    clear: both;
+}
+.GitHub-Projects section > div{
+    width: 90%;
+    padding: 20px;
+    border: 1px solid whitesmoke;
+    background-color:whitesmoke;
+    overflow: scroll;
+    height: 300px;
+
+}
+.GitHub-Projects section > div h1{
+    text-align: left;
+    letter-spacing: 1px;
+    margin :0;
+    display: flexbox;
+    color: darkorange;
+}
+
+.GitHub-Projects section > div div{
+    display: block;
+    background-color: floralwhite;
+}
+#Gist:checked ~ nav .Gist label,
+#Repos:checked ~ nav .Repos label{
+    background-color: whitesmoke;
+    position: relative;
+    border-bottom: 0px;
+
+}
+
+.GitHub-Projects section a{
+    color: navy;
+    text-decoration: none;
+    display: block;
+    background-color: blanchedalmond;
+    
+}
+
+.GitHub-Projects section p{
+    color:rgb(4, 68, 32);
+}
