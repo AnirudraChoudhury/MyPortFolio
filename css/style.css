@@ -1,118 +1,81 @@
-/* selector */
-
-body{
-    background: rgb(162, 228, 178);
+/* css reset */
+*{
     margin: 0;
     padding: 0;
 }
 
-h1{
-    text-align: center;
-    font-size: 30px;
+/* css variavle */
+:root{
+    --navbar-height:60px;
 }
+/* selector */
 
 /* Class selector */
 /* heading section styles */
-.MyDet{
+#MyDet{
+    display: flex;
+    align-items: top;
+    /* align-content: top; */
     position: relative;
-    margin: auto;
-    width: 100%;
-    height: 200px;
-    background-color: lavender;
-    display: inline-block;
     /* border:darkred 3px dashed ; */
 }
-.MyDet > img{
-    top: 10px;
-    left:40px;
-    width: 125px;
-    height: 175px;
-    border-radius: 60px;
-    border: lightseagreen 2px solid;
+#MyDet::before{
+    content: "";
     position: absolute;
-    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color:darkblue;
+    z-index: -1;
+    opacity: 10;
 }
-.MyDet h1{
-    margin: auto;
-    width:45%;
+/* Logo and img Section Styling */
+#logo{
+    margin:5px 5px;
+    /* border: firebrick 2px dashed; */
+
+}
+
+#logo img{
     height:75px;
-    text-align: left;
-    font-size: 60px ;
-    position: absolute;
-    top: 0px;
-    left:175px;
-    display: inline-block;
+    margin:5px 5px;
+    border-radius: 20px;
+
+}
+
+/* Snapshot of profile */
+#ProfileSnap{
+    margin:5px 5px;
+    color: white;
+    /* border: brown 2px dashed; */
+}
+#ProfileSnap h1{
+    font-size: 2rem;
+    /* border: rgb(53, 14, 114) 2px dashed; */
+}
+#ProfileSnap ul{
+    margin-left: 20px;
+    /* border: rgb(53, 14, 114) 2px dashed; */
+}
+
+/* Contact Details */
+
+#ContactDet{
+    margin:5px 5px;
+    display: flex;
+    flex-direction: column;
+}
+#ContactDet h2{
+    display: flex;
+    color: white;
+    margin: 5px;
+    align-items: top;
     
 }
-
-/* linkedin link styles */
-
-#lin img{
-    position: absolute;
-    top:5px;
-    left:20px;
-    /* width: 25px; */
-    /* height: 25px; */
+#ContactDet img{
+    height: 30px;
 }
-#lin{
-    padding-right: 20px;
-    width: 30%;
-    height: 40px;
-    position: absolute;
-    top: 10px;
-    left: 65%;
-    color: white;
-    font-size: 25px;
-    text-align: right;
-    text-decoration: none;
-    border-radius: 15px;
-    background-color:#2867b2;
-    /* border:darkred 3px dashed; */
-}
-
-/* Github link styles */
-
-#git img{
-    position: absolute;
-    top:5px;
-    left:20px;
-    /* width: 25px; */
-    /* height: 25px; */
-    
-}
-#git{
-    padding-right: 20px;
-    width: 30%;
-    height: 40px;
-    position: absolute;
-    top: 60px;
-    left: 65%;
-    color: white;
-    font-size: 25px;
-    text-align: right;
-    text-decoration: none;
-    border-radius: 15px;
-    background-color: black;
-    /* border:darkred 3px dashed; */
-}
-.MyDet ul{
-    /* border: blue 2px dashed; */
-    display:inline-block;
-    position: absolute;
-    top: 55px;
-    left: 170px;
-    width: 50%;
-    height: auto;
-    font-size: 18px;
-}
-.MyDet h2{
-    /* border: blue 2px dashed; */
-    display: inline-block;
-    position: absolute;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
-    top:100px;
-    left:65%
+#ContactDet a{
+    margin: 10px 10px;
 }
 /* id selector */
 
@@ -128,37 +91,35 @@ h1{
     display: block;
 }
 
-*, *:after, *:before{
+/* *, *:after, *:before{
     box-sizing: border-box;
-}
+} */
 
 .GitHub-Projects{
+    position: relative;
+    margin: auto;
     width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
-
+    max-width: 730px;
+    
 }
 
-.GitHub-Projects ul{
+/* styling tabs */
+#Github-tab ul{
+    display: flex;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 15px 0px;
 }
-.GitHub-Projects ul>li label{
-    float: left;
+#Github-tab ul li{
+    margin:0;
+}
+#Github-tab ul li label{
     padding: 15px 25px;
     border: 1px solid cyan;
     border-bottom: 0;
     background-color:cornsilk;
 }
-.GitHub-Projects ul>li label:hover{
+#Github-tab ul li label:hover{
     background-color: cyan;
-}
-.GitHub-Projects ul>li label:active{
-    background-color: greenyellow;
-}
-.GitHub-Projects section{
-    clear: both;
 }
 .GitHub-Projects section > div{
     width: 90%;
@@ -176,7 +137,9 @@ h1{
     display: flexbox;
     color: darkorange;
 }
-
+.GitHub-Projects section > div ol{
+    margin: 0px 30px;
+}
 .GitHub-Projects section > div div{
     display: block;
     background-color: floralwhite;
