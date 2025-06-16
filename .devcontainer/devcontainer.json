@@ -1,0 +1,11 @@
+{
+    "name": "React",
+    "dockerFile": "Dockerfile",
+    "runArgs": [
+        "--env-file", "${localWorkspaceFolder}/.devcontainer/.env"
+    ],
+    "customizations": {
+        "vscode": {
+        }
+    }
+}
