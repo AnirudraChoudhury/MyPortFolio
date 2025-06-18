@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/anirudra-portfolio' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/anirudra-portfolio/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/MyPortFolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/MyPortFolio/' : '',
   webpack: (config) => {
     config.module.rules.push({
       test: /\.css$/,
