@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { ChevronDown, ExternalLink, Github, Linkedin, Mail, Code, Database, Cog, ArrowRight, Calendar, MapPin, Building } from 'lucide-react';
+import {
+  FaChevronDown, FaExternalLinkAlt, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaDatabase, FaCog, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt, FaBuilding
+} from 'react-icons/fa';
 
 // Fixing the missing module declaration for 'lucide-react'
 // Ensure the package is installed using `npm install lucide-react` or `yarn add lucide-react`
@@ -14,6 +16,7 @@ interface Project {
   category: string;
   impact: string;
   year: string;
+  url: string;
 }
 
 interface Blog {
@@ -24,136 +27,49 @@ interface Blog {
   description: string;
 }
 
+interface Skill {
+  name: string;
+  level: number;
+  category: string;
+}
+
+interface Experience {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  highlights: string[];
+}
+
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [projects, setProjects] = useState<Project[]>([]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [experience, setExperience] = useState<Experience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulate API calls to MongoDB Atlas
   useEffect(() => {
-    // Simulate loading projects from MongoDB
-    setTimeout(() => {
-      setProjects([
-        {
-          id: 1,
-          title: "Centralized Job Processor Tool",
-          description: "Optimized resource usage across Vault environments with intelligent job scheduling and resource allocation.",
-          technologies: ["Node.js", "TypeScript", "Vault API"],
-          category: "Backend",
-          impact: "Reduced processing time by 40%",
-          year: "2023",
-        },
-        {
-          id: 2,
-          title: "Vault Migration Tool",
-          description: "Automated reference fixing and structured migration from network drives to Vault PDM system.",
-          technologies: ["Python", "Vault API"],
-          category: "Migration",
-          impact: "Improved data integrity by 30%",
-          year: "2022",
-        },
-        {
-          id: 3,
-          title: "Next.js PDM Monitoring Dashboard",
-          description: "Real-time server and PDM monitoring web application with integrated alerting system.",
-          technologies: ["Next.js", "React", "Tailwind CSS"],
-          category: "Frontend",
-          impact: "Enhanced monitoring efficiency by 50%",
-          year: "2024",
-        },
-        {
-          id: 4,
-          title: "OCR Drawing Material Reader",
-          description: "Automated material specification extraction from engineering drawings using AI.",
-          technologies: ["Python", "TensorFlow", "OpenCV"],
-          category: "AI",
-          impact: "Reduced manual effort by 70%",
-          year: "2025",
-        }
-      ]);
-
-      setBlogs([
-        {
-          id: 1,
-          title: "Automating Autodesk Vault: From Manual to Magical",
-          url: "#",
-          date: "2024-05-15",
-          description: "Deep dive into Vault customization and automation techniques.",
-        },
-        {
-          id: 2,
-          title: "PLM Migration Strategies: Lessons from the Trenches",
-          url: "#",
-          date: "2024-04-20",
-          description: "Real-world experiences and best practices for PLM migrations.",
-        },
-        {
-          id: 3,
-          title: "The Engineer's Guide to Next.js: Building Technical Dashboards",
-          url: "#",
-          date: "2024-03-10",
-          description: "How to leverage Next.js for building efficient dashboards.",
-        }
-      ]);
-
+    setIsLoading(true);
+    Promise.all([
+      fetch('https://anirudrachoudhury.vercel.app/api/projects/').then(res => res.json()),
+      fetch('https://anirudrachoudhury.vercel.app/api/blogs/').then(res => res.json()),
+      fetch('https://anirudrachoudhury.vercel.app/api/skills/').then(res => res.json()),
+      fetch('https://anirudrachoudhury.vercel.app/api/experiences/').then(res => res.json()),
+    ]).then(([projectsData, blogsData, skillsData, experienceData]) => {
+      setProjects(projectsData);
+      setBlogs(blogsData);
+      setSkills(skillsData);
+      setExperience(experienceData);
       setIsLoading(false);
-    }, 1000);
+    }).catch(() => setIsLoading(false));
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const skills = [
-    { name: "Autodesk Vault", level: 95, category: "PLM/PDM" },
-    { name: "C# / .NET", level: 90, category: "Programming" },
-    { name: "Python", level: 85, category: "Programming" },
-    { name: "Next.js / React", level: 80, category: "Web Development" },
-    { name: "PowerShell", level: 95, category: "Automation" },
-    { name: "SQL / Database", level: 85, category: "Data" },
-    { name: "CATIA / Inventor", level: 80, category: "CAD" },
-    { name: "Power BI", level: 75, category: "Analytics" }
-  ];
-
-  const experience = [
-    {
-      company: "Flexur Systems",
-      role: "Autodesk Vault Administrator",
-      period: "2021 - Present",
-      location: "NOV (Offshore Project)",
-      highlights: [
-        "Developed 100+ PowerShell scripts for Vault/Inventor administration",
-        "Built centralized job processor reducing resource usage by 60%",
-        "Created OCR-based drawing material reader with 99% accuracy",
-        "Implemented Next.js monitoring dashboard for real-time system visibility"
-      ]
-    },
-    {
-      company: "MACMET",
-      role: "Digital Transformation Specialist",
-      period: "2017 - 2021",
-      location: "India",
-      highlights: [
-        "Automated reporting via VBA + SQL + SSRS replacing manual processes",
-        "Migrated 3000+ parts using automated Vault scripts",
-        "Co-founded custom software agency delivering multiple client projects",
-        "Built configurable ERP system (90% completion)"
-      ]
-    },
-    {
-      company: "Eastman Crusher",
-      role: "Mechanical Design Engineer",
-      period: "2016 - 2017",
-      location: "India",
-      highlights: [
-        "Designed Primary Sampling Units for coal quality inspection",
-        "Created parametric designs in Autodesk Inventor",
-        "Integrated Excel with iLogic for automated proposal generation"
-      ]
-    }
-  ];
 
   return (
     <>
@@ -171,9 +87,8 @@ const Portfolio = () => {
                   <button
                     key={item}
                     onClick={() => scrollToSection(item)}
-                    className={`capitalize transition-colors hover:text-blue-400 ${
-                      activeSection === item ? 'text-blue-400' : 'text-slate-300'
-                    }`}
+                    className={`capitalize transition-colors hover:text-blue-400 ${activeSection === item ? 'text-blue-400' : 'text-slate-300'
+                      }`}
                   >
                     {item}
                   </button>
@@ -199,18 +114,18 @@ const Portfolio = () => {
                 <span className="text-blue-400">Turning manual workflows into self-running systems.</span>
               </p>
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <div className="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-full">
-                <Cog className="w-5 h-5 text-blue-400" />
+                <FaCog className="w-5 h-5 text-blue-400" />
                 <span>Autodesk Vault Expert</span>
               </div>
               <div className="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-full">
-                <Code className="w-5 h-5 text-green-400" />
+                <FaCode className="w-5 h-5 text-green-400" />
                 <span>Full-Stack Developer</span>
               </div>
               <div className="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-full">
-                <Database className="w-5 h-5 text-purple-400" />
+                <FaDatabase className="w-5 h-5 text-purple-400" />
                 <span>PLM/PDM Specialist</span>
               </div>
             </div>
@@ -221,7 +136,7 @@ const Portfolio = () => {
                 className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-all flex items-center gap-2 group"
               >
                 View Projects
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
@@ -233,7 +148,7 @@ const Portfolio = () => {
           </div>
 
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <ChevronDown className="w-6 h-6 text-slate-400" />
+            <FaChevronDown className="w-6 h-6 text-slate-400" />
           </div>
         </section>
 
@@ -245,23 +160,23 @@ const Portfolio = () => {
               <div>
                 <h3 className="text-2xl font-semibold mb-6 text-blue-400">Engineering Background</h3>
                 <p className="text-slate-300 leading-relaxed mb-6">
-                  Started as a mechanical engineer with a passion for automation. From designing utensil polishing machines 
+                  Started as a mechanical engineer with a passion for automation. From designing utensil polishing machines
                   to building complex PLM systems, I've always looked for ways to make processes more efficient.
                 </p>
                 <p className="text-slate-300 leading-relaxed">
-                  My unique journey combines hands-on mechanical design experience with modern software development, 
+                  My unique journey combines hands-on mechanical design experience with modern software development,
                   giving me a deep understanding of both engineering workflows and the technology needed to optimize them.
                 </p>
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-6 text-purple-400">Technical Evolution</h3>
                 <p className="text-slate-300 leading-relaxed mb-6">
-                  Evolved from Excel macros and VBA scripts to building full-stack applications with Next.js and MongoDB. 
-                  Specialized in Autodesk Vault customization, having automated migrations of 3000+ parts and built 
+                  Evolved from Excel macros and VBA scripts to building full-stack applications with Next.js and MongoDB.
+                  Specialized in Autodesk Vault customization, having automated migrations of 3000+ parts and built
                   enterprise-grade monitoring systems.
                 </p>
                 <p className="text-slate-300 leading-relaxed">
-                  Currently working as a Solution Architect, helping organizations transform their engineering processes 
+                  Currently working as a Solution Architect, helping organizations transform their engineering processes
                   through intelligent automation and modern PLM/PDM implementations.
                 </p>
               </div>
@@ -278,7 +193,7 @@ const Portfolio = () => {
                       <span className="text-sm text-slate-400">{skill.category}</span>
                     </div>
                     <div className="w-full bg-slate-700 rounded-full h-2">
-                      <div 
+                      <div
                         className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000"
                         style={{ width: `${skill.level}%` }}
                       ></div>
@@ -302,17 +217,17 @@ const Portfolio = () => {
                       <h3 className="text-2xl font-semibold text-blue-400">{exp.role}</h3>
                       <div className="flex items-center gap-4 mt-2">
                         <div className="flex items-center gap-2">
-                          <Building className="w-4 h-4 text-slate-400" />
+                          <FaBuilding className="w-4 h-4 text-slate-400" />
                           <span className="text-lg text-slate-300">{exp.company}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-slate-400" />
+                          <FaMapMarkerAlt className="w-4 h-4 text-slate-400" />
                           <span className="text-slate-400">{exp.location}</span>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 mt-2 md:mt-0">
-                      <Calendar className="w-4 h-4 text-slate-400" />
+                      <FaCalendarAlt className="w-4 h-4 text-slate-400" />
                       <span className="text-slate-400">{exp.period}</span>
                     </div>
                   </div>
@@ -348,7 +263,14 @@ const Portfolio = () => {
                         <span className="bg-blue-600 text-xs px-2 py-1 rounded">{project.category}</span>
                         <span className="text-slate-400 text-sm">{project.year}</span>
                       </div>
-                      <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open ${project.title} project`}
+                      >
+                        <FaExternalLinkAlt className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                      </a>
                     </div>
                     <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-400 transition-colors">
                       {project.title}
@@ -391,17 +313,17 @@ const Portfolio = () => {
                         </h3>
                         <p className="text-slate-300 mb-3">{blog.description}</p>
                         <div className="flex items-center gap-2 text-slate-400 text-sm">
-                          <Calendar className="w-4 h-4" />
+                          <FaCalendarAlt className="w-4 h-4" />
                           {new Date(blog.date).toLocaleDateString()}
                         </div>
                       </div>
                       <div className="mt-4 md:mt-0">
-                        <a 
+                        <a
                           href={blog.url}
                           className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
                         >
                           Read Article
-                          <ExternalLink className="w-4 h-4" />
+                          <FaExternalLinkAlt className="w-4 h-4" />
                         </a>
                       </div>
                     </div>
@@ -417,21 +339,21 @@ const Portfolio = () => {
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-bold mb-8">Let's Build Something Amazing</h2>
             <p className="text-xl text-slate-300 mb-12 leading-relaxed">
-              Ready to transform your engineering processes? Whether you need PLM/PDM consultation, 
+              Ready to transform your engineering processes? Whether you need PLM/PDM consultation,
               custom automation solutions, or full-stack development, I'm here to help.
             </p>
-            
+
             <div className="flex justify-center gap-8 mb-12">
-              <a href="mailto:your.email@example.com" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
-                <Mail className="w-5 h-5" />
+              <a href="mailto:anirudra.choudhury@yahoo.in" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                <FaEnvelope className="w-5 h-5" />
                 <span>Email Me</span>
               </a>
-              <a href="https://linkedin.com/in/yourprofile" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="https://www.linkedin.com/in/anirudra-choudhury/" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                <FaLinkedin className="w-5 h-5" />
                 <span>LinkedIn</span>
               </a>
-              <a href="https://github.com/yourprofile" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
-                <Github className="w-5 h-5" />
+              <a href="https://github.com/AnirudraChoudhury" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                <FaGithub className="w-5 h-5" />
                 <span>GitHub</span>
               </a>
             </div>
@@ -459,8 +381,10 @@ const Portfolio = () => {
         {/* Footer */}
         <footer className="bg-slate-900 py-8 border-t border-slate-700">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <p className="text-slate-400">
-              © 2024 Anirudra Choudhury. Built with Next.js, MongoDB Atlas, and deployed on GitHub Pages.
+            <p className="text-slate-400 text-sm">
+              © 2015-{new Date().getFullYear()} Anirudra Choudhury. All rights reserved.<br />
+              Built with Next.js. APIs hosted on Vercel. Database hosted on MongoDB Atlas.<br />
+              This site and its content are the property of Anirudra Choudhury.
             </p>
           </div>
         </footer>
